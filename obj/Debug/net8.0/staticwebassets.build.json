@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "gd+JCzEFIpN+dGq/4WTMTbo7ZdjqDm8j/ngAJO/RSlc=",
+  "Source": "SmartTaskTracker.API",
+  "BasePath": "_content/SmartTaskTracker.API",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}
