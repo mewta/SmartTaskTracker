@@ -1,6 +1,5 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
-
 namespace SmartTaskTracker.API.Data;
 
 public class AppDbContextFactory : IDesignTimeDbContextFactory<AppDbContext>

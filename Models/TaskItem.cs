@@ -1,7 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
 namespace SmartTaskTracker.API.Models;
-
 public class TaskItem
 {
     public int Id { get; set; }
@@ -14,4 +13,6 @@ public class TaskItem
     // 🔗 Relationship
     public int ProjectId { get; set; }
     public Project Project { get; set; } = null!;
+    public ICollection<TimeEntry> TimeEntries { get; set; } = new List<TimeEntry>();
+
 }
