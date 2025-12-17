@@ -1,132 +1,189 @@
-Smart Task & Time Tracker API (.NET 8)
-Overview
+# Smart Task & Time Tracker API (.NET 8)
 
-Smart Task & Time Tracker is a backend REST API built using ASP.NET Core (.NET 8) that allows users to manage projects, tasks, and track time spent on tasks. The application uses JWT-based authentication to secure all endpoints except registration and login.
+##  Overview
 
-This project was developed as part of an internship assignment to demonstrate understanding of Web API development, authentication, database design, and clean backend architecture.
+Smart Task & Time Tracker is a backend REST API built using **ASP.NET Core Web API (.NET 8)**. The project allows users to manage projects, tasks, and time entries with secure **JWT-based authentication**. It was developed as part of an internship assignment to demonstrate backend development, database design, and API security concepts.
 
-Tech Stack
+---
 
-ASP.NET Core Web API (.NET 8)
+## Features
 
-Entity Framework Core (Code First)
+### Authentication
 
-SQL Server (Docker)
+* User Registration
+* User Login
+* JWT-based authentication & authorization
+* Secure password hashing using BCrypt
 
-JWT Authentication
+### Project Management
 
-Swagger (OpenAPI)
+* Create projects
+* View all projects
+* Update project details (name, description, status)
 
-Git & GitHub
+### Task Management
 
-Core Features
-Authentication
+* Create tasks under projects
+* View tasks by project
+* Update task status (Pending → InProgress → Completed)
 
-User registration
+### Time Tracking
 
-User login
+* Add time entries to tasks
+* View time entries per task
+* Get total hours spent on a task
 
-JWT-based authentication
+---
 
-Secure access to all protected endpoints
+##  Tech Stack
 
-Project Management
+* **ASP.NET Core Web API (.NET 8)**
+* **SQL Server** (Docker)
+* **Entity Framework Core (Code First)**
+* **JWT Authentication**
+* **Swagger / OpenAPI**
+* **Git & GitHub**
 
-Create projects
+---
 
-View all projects
+## Project Structure
 
-Update project details (name, description, status)
+```
+SmartTaskTracker.API
+│
+├── Controllers
+│   ├── AuthController.cs
+│   ├── ProjectsController.cs
+│   ├── TasksController.cs
+│   └── TimeEntriesController.cs
+│
+├── Data
+│   ├── AppDbContext.cs
+│   └── AppDbContextFactory.cs
+│
+├── DTOs
+│   ├── Auth
+│   ├── Projects
+│   ├── Tasks
+│   └── TimeEntries
+│
+├── Helpers
+│   ├── JwtTokenGenerator.cs
+│   └── PasswordHasher.cs
+│
+├── Models
+│   ├── User.cs
+│   ├── Project.cs
+│   ├── TaskItem.cs
+│   └── TimeEntry.cs
+│
+├── Program.cs
+├── appsettings.json
+└── README.md
+```
 
-Task Management
+---
 
-Create tasks under a project
+## Authentication Flow (Swagger)
 
-View tasks by project
+1. **POST /api/auth/register** – Register a user
+2. **POST /api/auth/login** – Login and get JWT token
+3. Click **Authorize** in Swagger
+4. Enter:
 
-Update task status (Pending, InProgress, Completed)
+```
+Bearer <your_token_here>
+```
 
-Time Tracking
+5. Access secured endpoints
 
-Add time entries for tasks
+---
 
-View time entries per task
+## API Endpoints
 
-Get total hours spent on a task
+### Auth
 
-Database Design
+* `POST /api/auth/register`
+* `POST /api/auth/login`
 
-One-to-many relationship: Project → Tasks
+### Projects
 
-One-to-many relationship: Task → TimeEntries
+* `POST /api/projects`
+* `GET /api/projects`
+* `PUT /api/projects/{id}`
 
-EF Core Code-First approach with migrations
+### Tasks
 
-API Endpoints
-Authentication
-POST /api/auth/register
-POST /api/auth/login
+* `POST /api/projects/{projectId}/tasks`
+* `GET /api/projects/{projectId}/tasks`
+* `PUT /api/tasks/{id}/status`
 
-Projects
-POST /api/projects
-GET /api/projects
-PUT /api/projects/{id}
+### Time Entries
 
-Tasks
-POST /api/projects/{projectId}/tasks
-GET /api/projects/{projectId}/tasks
-PUT /api/tasks/{id}/status
+* `POST /api/tasks/{taskId}/time-entries`
+* `GET /api/tasks/{taskId}/time-entries`
+* `GET /api/tasks/{taskId}/time-entries/total-hours`
 
-Time Entries
-POST /api/tasks/{taskId}/time-entries
-GET /api/tasks/{taskId}/time-entries
-GET /api/tasks/{taskId}/time-entries/total-hours
+---
 
+## Testing
 
-All endpoints except login and registration require JWT authentication.
+* APIs tested using **Swagger UI**
+* JWT-protected endpoints validated using Authorization header
 
-Running the Project
-Prerequisites
+---
 
-.NET SDK 8.0
+## Database
 
-Docker
+* EF Core Code-First approach
+* Migrations used for schema creation
+* Relationships:
 
-SQL Server container running
+  * Project → Tasks (One-to-Many)
+  * Task → TimeEntries (One-to-Many)
 
-Steps
+---
 
-Clone the repository
+## How to Run
 
-Start SQL Server using Docker
+1. Clone the repository
+2. Start SQL Server (Docker)
+3. Update connection string in `appsettings.json`
+4. Run migrations:
 
-Update the connection string in appsettings.json
-
-Apply migrations:
-
+```bash
 dotnet ef database update
+```
 
+5. Run the API:
 
-Run the API:
-
+```bash
 dotnet run
+```
 
+6. Open Swagger:
 
-Open Swagger at:
-
+```
 http://localhost:5078/swagger
+```
 
-Testing with Swagger
+---
 
-Register a user using /api/auth/register
+## Status
 
-Login using /api/auth/login and copy the JWT token
+✔ Core features completed
+✔ JWT authentication implemented
+✔ Swagger documentation available
+✔ Ready for evaluation / submission
 
-Click Authorize in Swagger
+---
 
-Paste the token as:
+## Author
 
-Bearer <your_token>
+**Maitri**
+
+Internship Project – Smart Task & Time Tracker
+
 
 
 Test protected endpoints
