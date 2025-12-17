@@ -1,6 +1,9 @@
+using System.ComponentModel.DataAnnotations;
+
 namespace SmartTaskTracker.API.DTOs.Tasks;
 
 public class UpdateTaskStatusDto
 {
-    public string Status { get; set; } = string.Empty;
+    [Required]
+    public string Status { get; set; } = "Pending";
 }

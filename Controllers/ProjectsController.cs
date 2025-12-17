@@ -50,5 +50,21 @@ public class ProjectsController : ControllerBase
 
         return Ok(projects);
     }
+    [HttpPut("{id}")]
+ public IActionResult UpdateProject(int id, UpdateProjectDto dto)
+  {
+    var project = _db.Projects.FirstOrDefault(p => p.Id == id);
+    if (project == null)
+        return NotFound("Project not found");
+
+    project.Name = dto.Name;
+    project.Description = dto.Description;
+    project.Status = dto.Status;
+
+    _db.SaveChanges();
+
+    return Ok("Project updated successfully");
+  }
+
 }
 

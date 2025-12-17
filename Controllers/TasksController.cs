@@ -18,7 +18,7 @@ public class TasksController : ControllerBase
         _db = db;
     }
 
-    // POST: api/projects/{projectId}/tasks
+    // POST: /api/projects/{projectId}/tasks
     [HttpPost]
     public IActionResult CreateTask(int projectId, CreateTaskDto dto)
     {
@@ -34,7 +34,7 @@ public class TasksController : ControllerBase
         return Ok(task);
     }
 
-    // GET: api/projects/{projectId}/tasks
+    // GET: /api/projects/{projectId}/tasks
     [HttpGet]
     public IActionResult GetTasks(int projectId)
     {
@@ -44,20 +44,23 @@ public class TasksController : ControllerBase
 
         return Ok(tasks);
     }
-    [Authorize]
+
+    // PUT: /api/projects/{projectId}/tasks/{taskId}/status
     [HttpPut("{taskId}/status")]
-     public IActionResult UpdateStatus(int taskId, UpdateTaskStatusDto dto)
-     {
-       var task = _db.Tasks.FirstOrDefault(t => t.Id == taskId);
+    public IActionResult UpdateTaskStatus(
+        int projectId,
+        int taskId,
+        UpdateTaskStatusDto dto)
+    {
+        var task = _db.Tasks
+            .FirstOrDefault(t => t.Id == taskId && t.ProjectId == projectId);
 
-       if (task == null)
-        return NotFound("Task not found");
+        if (task == null)
+            return NotFound("Task not found");
 
-    task.Status = dto.Status;
-    _db.SaveChanges();
+        task.Status = dto.Status;
+        _db.SaveChanges();
 
-    return Ok("Task status updated");
-     } 
+        return Ok("Task status updated");
+    }
 }
-
-

@@ -1,6 +1,5 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using SmartTaskTracker.API.Data;
 using SmartTaskTracker.API.DTOs.TimeEntries;
 using SmartTaskTracker.API.Models;
@@ -8,8 +7,8 @@ using SmartTaskTracker.API.Models;
 namespace SmartTaskTracker.API.Controllers;
 
 [ApiController]
-[Route("api/tasks/{taskId}/time-entries")]
 [Authorize]
+[Route("api/tasks/{taskId}/time-entries")]
 public class TimeEntriesController : ControllerBase
 {
     private readonly AppDbContext _db;
@@ -55,4 +54,17 @@ public class TimeEntriesController : ControllerBase
 
         return Ok(entries);
     }
+
+    // GET /api/tasks/{taskId}/time-entries/total-hours
+    [HttpGet("total-hours")]
+    public IActionResult GetTotalHours(int taskId)
+    {
+        var totalHours = _db.TimeEntries
+            .Where(t => t.TaskItemId == taskId)
+            .Sum(t => t.Hours);
+
+        return Ok(new { taskId, totalHours });
+    }
 }
+
+
