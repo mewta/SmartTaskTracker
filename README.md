@@ -171,10 +171,10 @@ http://localhost:5078/swagger
 
 ## Status
 
-✔ Core features completed
-✔ JWT authentication implemented
-✔ Swagger documentation available
-✔ Ready for evaluation / submission
+Core features completed 
+JWT authentication implemented
+Swagger documentation available
+Ready for evaluation / submission
 
 ---
 
