@@ -174,7 +174,7 @@ http://localhost:5078/swagger
 Core features completed 
 JWT authentication implemented
 Swagger documentation available
-Ready for evaluation / submission
+Ready for evaluation/submission
 
 ---
 
@@ -182,12 +182,11 @@ Ready for evaluation / submission
 
 **Maitri**
 
-Internship Project – Smart Task & Time Tracker
-
+Project – Smart Task & Time Tracker
 
 
 Test protected endpoints
 
 Project Status
 
-All required features have been implemented according to the assignment specifications, including authentication, CRUD operations, relationships, and documentation.
+All required features have been implemented in accordance with the assignment specifications, including authentication, CRUD operations, relationships, and documentation.
